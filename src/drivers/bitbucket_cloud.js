@@ -9,6 +9,7 @@ const ProxyAgent = require('proxy-agent');
 const { fetchUploadData, exec, gpuPresent, sleep } = require('../utils');
 
 const {
+  BITBUCKET_API_URL,
   BITBUCKET_COMMIT,
   BITBUCKET_BRANCH,
   BITBUCKET_PIPELINE_UUID,
@@ -28,7 +29,7 @@ class BitbucketCloud {
     if (repo !== 'cml') {
       const { protocol, host, pathname } = new URL(this.repo);
       this.repo_origin = `${protocol}//${host}`;
-      this.api = 'https://api.bitbucket.org/2.0';
+      this.api = BITBUCKET_API_URL || 'https://api.bitbucket.org/2.0';
       this.projectPath = encodeURIComponent(pathname.substring(1));
     }
   }
